@@ -1,3 +1,5 @@
+import { cart } from "../data/cart.js";
+
 let ProductsHtml = '';
 products.forEach((product) => {
     const html =`
@@ -54,6 +56,7 @@ products.forEach((product) => {
 });
 let ProductsGrid = document.querySelector('.products-grid')
     .innerHTML = ProductsHtml;
+let timer;
 document.querySelectorAll('.js-add-to-cart')
   .forEach((button) =>{
     button.addEventListener('click', () =>{
@@ -82,12 +85,12 @@ document.querySelectorAll('.js-add-to-cart')
         document.querySelector('.js-cart-quantity')
         .innerHTML = TotalQuantity;
       })
-        let added = document.querySelector(`.added-to-cart-${productId}`);
+      clearTimeout(timer);
+      let added = document.querySelector(`.added-to-cart-${productId}`);
         added.innerHTML = `<img src="images/icons/checkmark.png">
             Added`;
-      setTimeout(() =>{
-         added.innerHTML = '';
-      }, 2000);
+       timer = setTimeout(()=>{
+        added.innerHTML = ''
+      },2000)
       })
-      
       })
