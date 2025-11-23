@@ -1,4 +1,4 @@
-import { cart } from "../data/cart.js";
+import { cart, AddToCart} from "../data/cart.js";
 import { products } from "../data/products.js";
 
 let ProductsHtml = '';
@@ -57,41 +57,36 @@ products.forEach((product) => {
 });
 let ProductsGrid = document.querySelector('.products-grid')
     .innerHTML = ProductsHtml;
+
+    function UpdateCartQuantity(){
+        let TotalQuantity = 0;
+        cart.forEach((cartItem) =>{
+          let select = document.querySelector(`.js-quantity-selector-${cartItem.productId}`);
+        // console.log(`productId : ${item.productId} quantity : ${select.value}`);
+          if(select){
+            TotalQuantity += Number(select.value);
+          }
+          document.querySelector('.js-cart-quantity')
+          .innerHTML = TotalQuantity;
+        })
+    }
+
+    function AddedButton(productId){
+      clearTimeout(timer);
+      let added = document.querySelector(`.added-to-cart-${productId}`);
+      added.innerHTML = `<img src="images/icons/checkmark.png">
+        Added`;
+      timer = setTimeout(()=>{
+      added.innerHTML = ''
+    },2000)
+  }
 let timer;
 document.querySelectorAll('.js-add-to-cart')
   .forEach((button) =>{
     button.addEventListener('click', () =>{
       const productId = button.dataset.productId;
-      let MatchingItem;
-      cart.forEach((item) =>{
-        if(productId === item.productId){
-          MatchingItem = item;
-        }
-      })
-      if(MatchingItem){
-        MatchingItem.Quantity += 1;
-      }else{
-        cart.push({
-            productId : productId,
-            Quantity : 1
-          });
-      }
-      let TotalQuantity = 0;
-      cart.forEach((item) =>{
-        let select = document.querySelector(`.js-quantity-selector-${item.productId}`);
-       // console.log(`productId : ${item.productId} quantity : ${select.value}`);
-        if(select){
-          TotalQuantity += Number(select.value);
-        }
-        document.querySelector('.js-cart-quantity')
-        .innerHTML = TotalQuantity;
-      })
-      clearTimeout(timer);
-      let added = document.querySelector(`.added-to-cart-${productId}`);
-        added.innerHTML = `<img src="images/icons/checkmark.png">
-            Added`;
-       timer = setTimeout(()=>{
-        added.innerHTML = ''
-      },2000)
-      })
-      })
+      AddToCart(productId);
+      UpdateCartQuantity();
+      AddedButton(productId);
+  })
+  })
