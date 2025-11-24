@@ -42,5 +42,4 @@ export function AddToCart(productId){
     }
   });
   cart  = newCart;
-  console.log(cart);
 }
