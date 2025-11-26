@@ -1,10 +1,10 @@
-import { cart, AddToCart} from "../data/cart.js";
+import { cart, AddToCart } from "../data/cart.js";
 import { products } from "../data/products.js";
-import { formatCurrency } from "./utiles/money.js"; 
+import { formatCurrency } from "./utiles/money.js";
 
-let ProductsHtml = '';
+let ProductsHtml = "";
 products.forEach((product) => {
-    const html =`
+  const html = `
     <div class="product-container">
           <div class="product-image-container">
             <img class="product-image"
@@ -53,42 +53,43 @@ products.forEach((product) => {
             Add to Cart
           </button>
         </div>
-    `
-    ProductsHtml += html;
+    `;
+  ProductsHtml += html;
 });
-let ProductsGrid = document.querySelector('.products-grid')
-    .innerHTML = ProductsHtml;
+let ProductsGrid = (document.querySelector(".products-grid").innerHTML =
+  ProductsHtml);
 
-    function UpdateCartQuantity(){
-        let TotalQuantity = 0;
-        cart.forEach((cartItem) =>{
-          let select = document.querySelector(`.js-quantity-selector-${cartItem.productId}`);
-        // console.log(`productId : ${item.productId} quantity : ${select.value}`);
-          if(select){
-            TotalQuantity += Number(select.value);
-          }
-          document.querySelector('.js-cart-quantity')
-          .innerHTML = TotalQuantity;
-        })
+export function UpdateCartQuantity() {
+  let TotalQuantity = 0;
+  cart.forEach((cartItem) => {
+    let select = document.querySelector(
+      `.js-quantity-selector-${cartItem.productId}`
+    );
+    // console.log(`productId : ${item.productId} quantity : ${select.value}`);
+    if (select) {
+      TotalQuantity += Number(select.value);
     }
+    document.querySelector(".js-cart-quantity").innerHTML = TotalQuantity;
+  });
+}
 
-    function AddedButton(productId){
-      clearTimeout(timer);
-      let added = document.querySelector(`.added-to-cart-${productId}`);
-      added.innerHTML = `<img src="images/icons/checkmark.png">
+function AddedButton(productId) {
+  clearTimeout(timer);
+  let added = document.querySelector(`.added-to-cart-${productId}`);
+  added.innerHTML = `<img src="images/icons/checkmark.png">
         Added`;
-      timer = setTimeout(()=>{
-      added.innerHTML = ''
-    },2000)
-  }
+  timer = setTimeout(() => {
+    added.innerHTML = "";
+  }, 2000);
+}
 let timer;
-let mainfunc = document.querySelectorAll('.js-add-to-cart')
-  .forEach((button) =>{
-    button.addEventListener('click', () =>{
+let mainfunc = document
+  .querySelectorAll(".js-add-to-cart")
+  .forEach((button) => {
+    button.addEventListener("click", () => {
       const productId = button.dataset.productId;
       AddToCart(productId);
       UpdateCartQuantity();
       AddedButton(productId);
-  })
-  })
-  
+    });
+  });

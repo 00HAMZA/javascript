@@ -115,9 +115,13 @@
   margin-bottom: 5px;
 }
 
-.product-quantity .link-primary {
-  margin-left: 3px;
+.product-quantity {
+  display: grid;
+  grid-template-columns: 1fr auto auto auto auto ;
+  column-gap: 8px;
+  align-items: center;
 }
+
 
 @media (max-width: 1000px) {
   .delivery-options {
@@ -208,4 +212,18 @@
 
   margin-top: 11px;
   margin-bottom: 15px;
+}
+.quantity-input {
+  width: 70px;
+  border: 1px solid gray;
+  border-radius: 10px;
+}
+.bntSave {
+  background-color: white;
+  color: rgb(67, 67, 175);
+  border: none;
+  font-size: large;
+}
+.bntSave:hover {
+  color: orange;
 }
