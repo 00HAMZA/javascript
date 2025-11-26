@@ -44,4 +44,5 @@ export function AddToCart(productId){
         document.querySelector('.js-checkout-middle')
                 .querySelector('.js-return-to-home-link')
                     .innerHTML = totalorders;
+        return totalorders;
     }

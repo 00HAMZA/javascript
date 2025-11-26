@@ -95,6 +95,18 @@ carte.forEach((CartItem) => {
         </div>`;
 });
 document.querySelector(".js-order-summary").innerHTML = AllOrders;
+document.querySelectorAll(".js-delete-link").forEach((link) => {
+  link.addEventListener("click", () => {
+    const productId = link.dataset.productId;
+    removeFromCart(productId);
+    const item = document.querySelector(`.js-cart-item-container-${productId}`);
+    let checkout = document
+      .querySelector(".js-checkout-middle")
+      .querySelector(".js-return-to-home-link");
+    if (item) item.remove();
+    UpdateCartQuantity();
+  });
+});
 document.querySelectorAll(".js-update-link").forEach((link) => {
   link.addEventListener("click", () => {
     const parentElement = link.parentElement;
@@ -123,6 +135,9 @@ document.querySelectorAll(".js-update-link").forEach((link) => {
       divDelete.remove();
 
       deleteOroginal.style.display = "inline";
+      const item = carte.find((item) => item.productId === productId);
+      if (item) item.Quantity = Number(newValue);
+      UpdateCartQuantity();
     });
   });
 });
