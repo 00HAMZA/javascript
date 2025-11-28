@@ -2,7 +2,10 @@ import { cart as carte, removeFromCart } from "../data/cart.js";
 import { products } from "../data/products.js";
 import { formatCurrency } from "./utiles/money.js";
 import { UpdateCartQuantity } from "../../data/cart.js";
+import dayjs from "https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js";
+import { deliveryOptions } from "../data/DeliveiryOptions.js";
 
+//console.log(dayjs);
 let AllOrders = "";
 carte.forEach((CartItem) => {
   const productId = CartItem.productId;
@@ -52,44 +55,7 @@ carte.forEach((CartItem) => {
                 <div class="delivery-options-title">
                   Choose a delivery option:
                 </div>
-
-                <div class="delivery-option">
-                  <input type="radio" class="delivery-option-input"
-                    name="delivery-option-${Matchingproduct.name}">
-                  <div>
-                    <div class="delivery-option-date">
-                      Tuesday, June 21
-                    </div>
-                    <div class="delivery-option-price">
-                      FREE Shipping
-                    </div>
-                  </div>
-                </div>
-                <div class="delivery-option">
-                  <input type="radio" checked class="delivery-option-input"
-                    name="delivery-option-${Matchingproduct.name}">
-                  <div>
-                    <div class="delivery-option-date">
-                      Wednesday, June 15
-                    </div>
-                    <div class="delivery-option-price">
-                      $4.99 - Shipping
-                    </div>
-                  </div>
-                </div>
-                <div class="delivery-option">
-                  <input type="radio" class="delivery-option-input"
-                    name="delivery-option-${Matchingproduct.name}">
-                  <div>
-                    <div class="delivery-option-date">
-                      Monday, June 13
-                    </div>
-                    <div class="delivery-option-price">
-                      $9.99 - Shipping
-                    </div>
-                  </div>
-                </div>
-              </div>
+                ${koko(Matchingproduct.id)}
             </div>
           </div>
         </div>`;
@@ -141,5 +107,27 @@ document.querySelectorAll(".js-update-link").forEach((link) => {
     });
   });
 });
-
+function koko(productId) {
+  let html = "";
+  deliveryOptions.forEach((item) => {
+    const today = dayjs();
+    const DeliveryDate = today.add(item.DeliveryDays, "days");
+    const DateString = DeliveryDate.format("dddd, MMMM D");
+    const PriceString =
+      item.priceCents === 0 ? "FREE" : `$${formatCurrency(item.priceCents)}`;
+    html += `<div class="delivery-option">
+                  <input type="radio" class="delivery-option-input"
+                    name="delivery-option-${productId}">
+                  <div>
+                    <div class="delivery-option-date">
+                    ${DateString}
+                    </div>
+                    <div class="delivery-option-price">
+                     ${PriceString} - Shipping
+                    </div>
+                  </div>
+                </div>`;
+  });
+  return html;
+}
 UpdateCartQuantity();
