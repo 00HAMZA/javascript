@@ -9,6 +9,7 @@ import { UpdateCartQuantity } from "../../data/cart.js";
 import dayjs from "https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js";
 import { deliveryOptions } from "../../data/DeliveiryOptions.js";
 import { getProduct } from "../../data/products.js";
+import { renderPaymentSummary } from "./paymentSummary.js"
 
 export function rerenderOrderSummary() {
   let AllOrders = "";
@@ -69,6 +70,7 @@ export function rerenderOrderSummary() {
         `.js-cart-item-container-${productId}`
       );
       if (item) item.remove();
+      renderPaymentSummary();
       UpdateCartQuantity();
     });
   });
