@@ -1,7 +1,7 @@
 export function getProduct(productId){
   let MatchingItem;
     products.forEach((cartItem) => {
-      if (productId === cartItem.productId) {
+      if (productId === cartItem.id) {
         MatchingItem = cartItem;
       }
     });

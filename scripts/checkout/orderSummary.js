@@ -14,23 +14,23 @@ export function rerenderOrderSummary() {
   let AllOrders = "";
   cart.forEach((CartItem) => {
     const productId = CartItem.productId;
-    const Matchingproduct = getProduct(productId);
+    const MatchingItem = getProduct(productId);
     AllOrders += `
-<div class="cart-item-container js-cart-item-container-${Matchingproduct.id}">
+<div class="cart-item-container js-cart-item-container-${MatchingItem.id}">
     <div class="delivery-date">
               Delivery date: Wednesday, June 15
             </div>
 
             <div class="cart-item-details-grid">
               <img class="product-image"
-                src="${Matchingproduct.image}">
+                src="${MatchingItem.image}">
 
               <div class="cart-item-details">
                 <div class="product-name">
-                  ${Matchingproduct.name}
+                  ${MatchingItem.name}
                 </div>
                 <div class="product-price">
-                  ${formatCurrency(Matchingproduct.priceCents)}
+                  ${formatCurrency(MatchingItem.priceCents)}
                 </div>
                 <div class="product-quantity">
                   <span>
@@ -39,12 +39,12 @@ export function rerenderOrderSummary() {
                     }</span>
                   </span>
                   <span class="update-quantity-link link-primary js-update-link" data-product-id="${
-                    Matchingproduct.id
+                    MatchingItem.id
                   }">
                     Update
                   </span>
                   <span class="delete-quantity-link link-primary js-delete-link" data-product-id="${
-                    Matchingproduct.id
+                    MatchingItem.id
                   }">
                     Delete
                   </span>
@@ -55,7 +55,7 @@ export function rerenderOrderSummary() {
                 <div class="delivery-options-title">
                   Choose a delivery option:
                 </div>
-                ${koko(Matchingproduct.id)}
+                ${koko(MatchingItem.id)}
             </div>
           </div>
         </div>`;
