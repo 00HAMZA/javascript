@@ -1,4 +1,4 @@
-import { formatCurrency } from "../../scripts/utiles/money.js";
+import { formatCurrency } from "../../../scripts/utiles/money.js";
 describe("tests suite : formatCurrency", () => {
   it("converts Cents into Dollars :", () => {
     expect(formatCurrency(2094)).toEqual("20.94");
