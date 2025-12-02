@@ -1,13 +1,13 @@
 import { loadFromStorage } from "./cart.js";
 class Cart {
-  cartVar = undefined;
-  localStorageKey = undefined;
+  cartVar;
+  #localStorageKey; // private
 
   constructor(localStorageKey) {
-    this.localStorageKey = localStorageKey;
-    this.loadFromStorage();
+    this.#localStorageKey = localStorageKey;
+    this.#loadFromStorage();
   }
-  loadFromStorage() {
+  #loadFromStorage() {
     this.cartVar = JSON.parse(localStorage.getItem(this.loadFromStorage));
     if (!this.cartVar) {
       this.cartVar = [
@@ -27,7 +27,7 @@ class Cart {
     }
   }
   SaveToStorage() {
-    localStorage.setItem(this.localStorageKey, JSON.stringify(this.cartVar));
+    localStorage.setItem(this.#localStorageKey, JSON.stringify(this.cartVar));
   }
   AddToCart(productId) {
     let MatchingItem;
