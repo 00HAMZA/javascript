@@ -5,7 +5,7 @@ import '../data/cartClass.js';
 
 rerenderOrderSummary();
 //renderPaymentSummary();
-class User{
+/*class User{
     constructor(id, name, email){
         this.id = id;
         this.name = name;
@@ -28,4 +28,4 @@ class superman extends Admin{
     }
 }
 const hero1 = new superman("1234", "spiderman");
-console.log(hero1);
+console.log(hero1);*/
