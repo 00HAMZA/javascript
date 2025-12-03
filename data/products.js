@@ -1,3 +1,4 @@
+import { formatCurrency } from "../scripts/utiles/money.js";
 export function getProduct(productId){
   let MatchingItem;
     products.forEach((cartItem) => {
@@ -7,8 +8,25 @@ export function getProduct(productId){
     });
     return MatchingItem;
 }
-
-export const products = [
+class Product{
+  id;
+  image;
+  rating;
+  priceCents;
+  constructor(ProductDetailes){
+    this.id = ProductDetailes.id;
+    this.image = ProductDetailes.image;
+    this.rating = ProductDetailes.rating;
+    this.priceCents = ProductDetailes.priceCents;
+  }
+  getImageUrl(){
+    return `images/ratings/rating-${this.rating.stars * 10}.png`;
+  }
+  getPrice(){
+    return `$${formatCurrency(this.priceCents)}`;
+  }
+}
+const product1 = new Product(
   {
     id: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
     image: "images/products/athletic-cotton-socks-6-pairs.jpg",
@@ -19,7 +37,10 @@ export const products = [
     },
     priceCents: 1090,
     keywords: ["socks", "sports", "apparel"],
-  },
+  }
+);
+export const products = [
+  
   {
     id: "15b6fc6f-327a-4ec4-896f-486349e85a3d",
     image: "images/products/intermediate-composite-basketball.jpg",
@@ -479,4 +500,6 @@ export const products = [
     priceCents: 2400,
     keywords: ["sweaters", "hoodies", "apparel", "mens"],
   },
-];
+].map((productDetailes) =>{
+  return new Product(productDetailes);
+});

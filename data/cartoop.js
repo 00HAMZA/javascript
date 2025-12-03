@@ -77,11 +77,3 @@ function Cart(localStorageKey) {
   };
   return cart;
 }
-const cart = Cart("cartoop");
-const businessCart = Cart("businesscart");
-cart.loadFromStorage();
-businessCart.loadFromStorage();
-localStorage.clear();
-cart.AddToCart("hamza1234");
-console.log(cart);
-console.log(businessCart);

@@ -1,7 +1,7 @@
 import {
   cart,
   removeFromCart,
-  UpdateDeliveryOptions,
+   UpdateDeliveryOptions,
 } from "../../data/cart.js";
 import { products } from "../../data/products.js";
 import { formatCurrency } from "../utiles/money.js";
@@ -9,15 +9,19 @@ import { UpdateCartQuantity } from "../../data/cart.js";
 import dayjs from "https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js";
 import { deliveryOptions } from "../../data/DeliveiryOptions.js";
 import { getProduct } from "../../data/products.js";
-import { renderPaymentSummary } from "./paymentSummary.js"
+import { renderPaymentSummary } from "./paymentSummary.js";
 
 export function rerenderOrderSummary() {
   let AllOrders = "";
   cart.forEach((CartItem) => {
     const productId = CartItem.productId;
     const MatchingItem = getProduct(productId);
+    if (!MatchingItem) {
+      console.warn("product not found:", productId);
+      return;
+    }
     AllOrders += `
-<div class="cart-item-container js-cart-item-container-${MatchingItem.id}">
+<div class="cart-item-container js-cart-item-container-${productId}">
     <div class="delivery-date">
               Delivery date: Wednesday, June 15
             </div>
