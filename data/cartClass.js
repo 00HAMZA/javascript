@@ -84,5 +84,3 @@ const businessCart = new Cart('businesscart');
 
 localStorage.clear();
 cart.AddToCart("hamza1234");
-console.log(cart);
-console.log(businessCart);
