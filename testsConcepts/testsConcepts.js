@@ -1,3 +1,4 @@
+import '../data/backendPractice.js';
 // this keyword and stricts modes
 class BankAccount{
     #balance;
@@ -13,7 +14,6 @@ class BankAccount{
     }
 };
 const acc = new BankAccount(100);
-console.log(acc.getbalance());
 class User{
     #password;
     constructor(username, password){
@@ -33,6 +33,15 @@ class User{
     }
 }
 const user1 = new  User("hamza", 1234);
-console.log(user1.username);
-console.log(user1.checkpassword(12));
-user1.changepassword(124, 1337);
+class Koko{
+    #privat; // private
+    Public; // public
+    constructor(Public, privat){
+        this.Public = Public;
+        this.#privat = privat;
+    }
+    getprivat(){
+        return this.#privat;  
+    }
+}
+const koko1 = new Koko("hamza", "password");
